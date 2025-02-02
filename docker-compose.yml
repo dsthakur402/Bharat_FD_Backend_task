@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app
+      - ./staticfiles:/app/staticfiles
+    ports:
+      - "8000:8000"
+    depends_on:
+      - redis
+    environment:
+      - DEBUG=1
+      - DJANGO_SETTINGS_MODULE=bharatfd.settings
+
+  redis:
+    image: "redis:alpine"
+    ports:
+      - "6379:6379"
+
+  test:
+    build: .
+    command: sh -c "chmod +x wait-for-it.sh && ./wait-for-it.sh web:8000 -- ./wait-for-it.sh redis:6379 -- pytest"
+    volumes:
+      - .:/app
+    depends_on:
+      - redis
+      - web
+    environment:
+      - DEBUG=1
+      - DJANGO_SETTINGS_MODULE=bharatfd.settings
