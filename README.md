@@ -34,21 +34,16 @@ This is my submission for the BharatFD Backend Assignment. I have successfully c
   systemctl start docker
   ```
 
-### Step 2: Navigate to the Project Directory
-```sh
-cd bharatfd
-```
-
-### Step 3: Start the Services with Docker Compose
+### Step 2: Start the Services with Docker Compose
 ```sh
 docker-compose up --build
 ```
 
-### Step 4: Verify that All Services are Running
+### Step 3: Verify that All Services are Running
 - The test service will execute automatically to display the unit test results.
 
 
-### Step 5: Manually Run Test Cases (if needed)
+### Step 4: Manually Run Test Cases (if needed)
 ```sh
 docker-compose run test
 ```
